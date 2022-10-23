@@ -7,11 +7,18 @@ import Products from './Products.js';
 import Cart from './Cart.js';
 import ErrorPage from './ErrorPage.jsx';
 import SingleProduct from "./SingleProduct.js";
+import { ThemeProvider } from "styled-components";
 
 
 const App = () => {
 
-  return <BrowserRouter>
+  const theme = {
+    color: "#000000",
+  }
+
+  return (
+  <ThemeProvider theme={theme}>
+  <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/contact" element={<Contact />} />
@@ -22,6 +29,8 @@ const App = () => {
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   </BrowserRouter>
+  </ThemeProvider>
+  );
 };
 
 export default App;
