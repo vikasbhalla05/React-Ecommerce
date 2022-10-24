@@ -1,17 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
+// import styled from 'styled-components'
+import HeroSection from './components/HeroSection';
 
 const Home = () => {
   return (
-    <Heading>Home</Heading>
+    <>
+      <HeroSection name="Ecommerce Home" />
+    </>
   );
 }
 
-const Heading = styled.section`
-    background-color: ${({theme}) => theme.color};
-    width: 100vw;
-    height: 100vh;
-    text-align: center;
-`
 
 export default Home
