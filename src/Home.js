@@ -10,7 +10,7 @@ const Home = () => {
 const Heading = styled.section`
     background-color: ${({theme}) => theme.color};
     width: 100vw;
-    height: 200px;
+    height: 100vh;
     text-align: center;
 `
 

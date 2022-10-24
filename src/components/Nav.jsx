@@ -1,17 +1,18 @@
-import React from 'react';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
+import { CgMenu, CgClose } from "react-icons/cg";
 
 const Nav = () => {
+  const [menuItem, setMenuItem] = useState();
 
-    const Nav = styled.nav`
+  const Nav = styled.nav`
     .navbar-lists {
       display: flex;
       gap: 4rem;
       align-items: center;
 
-    
       .navbar-link {
         &:link,
         &:visited {
@@ -139,33 +140,74 @@ const Nav = () => {
     }
   `;
 
-    return (
-        <Nav>
-            <div className="navbar">
-                <ul className="navbar-lists">
-                    <li>
-                        <NavLink to="/" className="navbar-link home-link">Home</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/about" className="navbar-link">About</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/products" className="navbar-link">Products</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/contact" className="navbar-link">Contact</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/cart" className="navbar-link cart-trolley--link">
-                            <FiShoppingCart className="cart-trolley" />
-                            <span className="cart-total--item">10</span>
-                        </NavLink>
+  return (
+    <Nav>
+      <div className={menuItem ? "navbar active" : "navbar"}>
+        <ul className="navbar-lists">
+          <li>
+            <NavLink
+              to="/"
+              className="navbar-link home-link"
+              onClick={() => setMenuItem(false)}
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/about"
+              className="navbar-link"
+              onClick={() => setMenuItem(false)}
+            >
+              About
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/products"
+              className="navbar-link"
+              onClick={() => setMenuItem(false)}
+            >
+              Products
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/contact"
+              className="navbar-link"
+              onClick={() => setMenuItem(false)}
+            >
+              Contact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/cart"
+              className="navbar-link cart-trolley--link"
+              onClick={() => setMenuItem(false)}
+            >
+              <FiShoppingCart className="cart-trolley" />
+              <span className="cart-total--item">10</span>
+            </NavLink>
+          </li>
+        </ul>
 
-                    </li>
-                </ul>
-            </div>
-        </Nav>
-    )
-}
+        {/* two button for open and close of menu */}
+        <div className="mobile-navbar-btn">
+          <CgMenu
+            name="menu-outline"
+            className="mobile-nav-icon"
+            onClick={() => setMenuItem(true)}
+          />
+          <CgClose
+            name="close-outline"
+            className="mobile-nav-icon close-outline"
+            onClick={() => setMenuItem(false)}
+          />
+        </div>
+      </div>
+    </Nav>
+  );
+};
 
-export default Nav
+export default Nav;
