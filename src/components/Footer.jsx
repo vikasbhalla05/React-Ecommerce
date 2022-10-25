@@ -63,6 +63,7 @@ const Footer = () => {
                   <a
                     href="https://www.youtube.com/channel/UCwfaAHy4zQUb2APNOGXUCCA"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <FaYoutube className="icons" />
                   </a>

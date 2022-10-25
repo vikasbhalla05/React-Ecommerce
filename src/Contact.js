@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useProductContext } from "./Contexts/productContext";
 
 const Contact = () => {
   const Wrapper = styled.section`
@@ -34,9 +35,11 @@ const Contact = () => {
     }
   `;
 
+  const {myName} = useProductContext();
+
   return (
     <Wrapper>
-      <h2 className="common-heading">Contact Us</h2>
+      <h2 className="common-heading">Contact Us {myName}</h2>
 
       {/* map iframe */}
       <iframe
