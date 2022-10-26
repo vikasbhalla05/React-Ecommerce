@@ -5,14 +5,12 @@ const productReducer = (state, action) => {
         ...state,
         isLoading: true
       };
-      break;
     case "ERROR":
       return {
         ...state,
         isLoading: false,
         isError: true
       };
-      break;
     case "MY_PRODUCTS":
         let featuredProduct = action.payload.filter((ele) => {
             return ele.featured;
@@ -25,10 +23,8 @@ const productReducer = (state, action) => {
         featuredProducts: featuredProduct,
         isError: false
       };
-      break;
     default:
         return state;
-      break;
   }
 };
 
