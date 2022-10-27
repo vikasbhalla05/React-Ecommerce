@@ -36,7 +36,7 @@ const AppProvider = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ myName: "Here" }}>
+    <AppContext.Provider value={ { ...state } }>
       {children}
     </AppContext.Provider>
   );
