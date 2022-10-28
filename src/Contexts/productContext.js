@@ -12,8 +12,11 @@ const API = "https://api.pujakaitem.com/api/products";
 const initialState = {
   isLoading: false,
   isError: false,
+  singleError: false,
   products: [],
   featuredProducts: [],
+  singleLoading: false,
+  singleProduct: {}
 };
 
 const AppProvider = ({ children }) => {
@@ -31,12 +34,24 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const getSingleProducts = async (url) => {
+
+    dispatch({type: 'SINGLE_LOADING'});
+    try {
+      let fetchSingleProduct = await axios.get(url);
+      let singleProductData = fetchSingleProduct.data;
+      dispatch({ type: "SINGLE_PRODUCT", payload: singleProductData });
+    } catch (error) {
+      dispatch({ type: "SINGLE_ERROR"});
+    }
+  };
+
   useEffect(() => {
     getProducts(API);
   }, []);
 
   return (
-    <AppContext.Provider value={ { ...state } }>
+    <AppContext.Provider value={ { ...state, getSingleProducts } }>
       {children}
     </AppContext.Provider>
   );
