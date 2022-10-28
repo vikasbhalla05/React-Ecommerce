@@ -1,8 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import IndianPrice from "../Helpers/IndianPrice";
 
 const GridProduct = (currProduct) => {
   const { id, name, image, price, category } = currProduct;
+
+  // let indianPrice = (new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(price/100));
 
   return (
     <>
@@ -15,8 +18,9 @@ const GridProduct = (currProduct) => {
 
           <div className="card-data">
             <div className="card-data-flex">
+            
               <h3>{name}</h3>
-              <p className="card-data--price">{price}</p>
+              <p className="card-data--price">{<IndianPrice price={price}/>}</p>
             </div>
           </div>
         </div>
