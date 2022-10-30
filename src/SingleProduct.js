@@ -1,15 +1,22 @@
-import React, { useEffect }  from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { useProductContext } from './Contexts/productContext';
+import PageNavigation from "./components/PageNavigation";
+import { useProductContext } from "./Contexts/productContext";
+import ProductImages from "./components/ProductImages";
+import { Container } from "./styles/Container";
+import IndianPrice from "./Helpers/IndianPrice";
+import { TbTruckDelivery, TbReplace } from "react-icons/tb";
+
+import { MdSecurity } from "react-icons/md";
 
 const API = "https://api.pujakaitem.com/api/products";
 
-const SingleProduct =() => {
+const SingleProduct = () => {
+  const { id } = useParams();
 
-  const {id} = useParams();
-  
-  const {getSingleProducts, singleLoading, singleProduct} = useProductContext();
+  const { getSingleProducts, singleLoading, singleProduct } =
+    useProductContext();
 
   useEffect(() => {
     getSingleProducts(`${API}?id=${id}`);
@@ -24,13 +31,85 @@ const SingleProduct =() => {
     category,
     stock,
     stars,
-    reviews
+    reviews,
+    image,
   } = singleProduct;
 
-  
-  return <Wrapper>{ name } {price}</Wrapper>;
-}
+  if (singleLoading) return <div className="page_load">Loading...</div>;
 
+  return (
+    <Wrapper>
+      <PageNavigation title={name} />
+      <Container className="container">
+        <div className="grid grid-two-column">
+          {/* product images */}
+          <div className="product_images">
+            <ProductImages imgs={image} />
+          </div>
+
+          {/* product details */}
+          <div className="product-data">
+            <h2>{name}</h2>
+            <p>{stars}</p>
+
+            {/* Cross through price */}
+            <span className="product-data-price">
+              MRP{" "}
+              <del>
+                <IndianPrice price={price + 250000} />
+              </del>
+            </span>
+            {/* discounted Price */}
+            <p className="product-data-price product-data-real-price">
+              Deal of the Day <IndianPrice price={price} />
+            </p>
+            {/* product description */}
+            <p className="product-data-info">{description}</p>
+
+            <div className="product-data-warranty">
+              <div className="product-warranty-data">
+                <TbTruckDelivery className="warranty-icon" />
+                <p>Free Delivery</p>
+              </div>
+
+              <div className="product-warranty-data">
+                <TbReplace className="warranty-icon" />
+                <p>30 Days Replacement</p>
+              </div>
+
+              <div className="product-warranty-data">
+                <TbTruckDelivery className="warranty-icon" />
+                <p>Thapa Delivered </p>
+              </div>
+
+              <div className="product-warranty-data">
+                <MdSecurity className="warranty-icon" />
+                <p>2 Year Warranty </p>
+              </div>
+            </div>
+
+            <div className="product-data-info">
+              <p>
+                Available :{" "}
+                <span>
+                  {stock ? stock + " In Stock" : "Currently Out of Stock"}
+                </span>
+              </p>
+              <p>
+                Id : <span>{id}</span>
+              </p>
+              <p>
+                Brand : <span>{company}</span>
+              </p>
+            </div>
+
+            <hr />
+          </div>
+        </div>
+      </Container>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   .container {
@@ -70,6 +149,7 @@ const Wrapper = styled.section`
 
     .product-data-price {
       font-weight: bold;
+      font-size: 1.5rem;
     }
     .product-data-real-price {
       color: ${({ theme }) => theme.colors.btn};
@@ -79,6 +159,7 @@ const Wrapper = styled.section`
       flex-direction: column;
       gap: 1rem;
       font-size: 1.8rem;
+      text-align: justify;
 
       span {
         font-weight: bold;

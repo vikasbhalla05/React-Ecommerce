@@ -33,15 +33,15 @@ const productReducer = (state, action) => {
     case "SINGLE_PRODUCT":
       return {
         ...state,
-        isLoading: false,
-        isError: false,
+        singleLoading: false,
+        singleError: false,
         singleProduct: action.payload,
       };
 
     case "SINGLE_ERROR":
       return {
         ...state,
-        isLoading: false,
+        singleLoading: false,
         singleError: true,
       };
     default:
