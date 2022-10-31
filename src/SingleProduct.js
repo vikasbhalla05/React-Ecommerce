@@ -7,6 +7,7 @@ import ProductImages from "./components/ProductImages";
 import { Container } from "./styles/Container";
 import IndianPrice from "./Helpers/IndianPrice";
 import { TbTruckDelivery, TbReplace } from "react-icons/tb";
+import StarReviews from "./components/StarReviews";
 
 import { MdSecurity } from "react-icons/md";
 
@@ -50,7 +51,7 @@ const SingleProduct = () => {
           {/* product details */}
           <div className="product-data">
             <h2>{name}</h2>
-            <p>{stars}</p>
+            <StarReviews stars={stars} reviews={reviews}/>
 
             {/* Cross through price */}
             <span className="product-data-price">
