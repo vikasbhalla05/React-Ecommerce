@@ -9,7 +9,6 @@ const StarReviews = ({stars, reviews}) => {
         let number = idx+0.5;
         // {console.log(stars);}
 
-        debugger;
         return ( <span key={idx}>
             {
                 stars >= idx+1 ? (<BsStarFill className='icon'/>)

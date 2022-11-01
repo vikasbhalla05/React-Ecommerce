@@ -8,13 +8,14 @@ import { Container } from "./styles/Container";
 import IndianPrice from "./Helpers/IndianPrice";
 import { TbTruckDelivery, TbReplace } from "react-icons/tb";
 import StarReviews from "./components/StarReviews";
+import AddToCart from "./components/AddToCart";
 
 import { MdSecurity } from "react-icons/md";
 
 const API = "https://api.pujakaitem.com/api/products";
 
 const SingleProduct = () => {
-  const { id } = useParams();
+  let { id } = useParams();
 
   const { getSingleProducts, singleLoading, singleProduct } =
     useProductContext();
@@ -24,7 +25,7 @@ const SingleProduct = () => {
   }, []);
 
   const {
-    id: alias,
+    id : alias,
     name,
     price,
     company,
@@ -100,11 +101,16 @@ const SingleProduct = () => {
                 Id : <span>{id}</span>
               </p>
               <p>
+                Id : <span>{category}</span>
+              </p>
+              <p>
                 Brand : <span>{company}</span>
               </p>
             </div>
 
             <hr />
+
+            {stock > 0 && <AddToCart product={singleProduct} />}
           </div>
         </div>
       </Container>
