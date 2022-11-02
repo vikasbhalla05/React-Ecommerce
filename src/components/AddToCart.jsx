@@ -1,12 +1,24 @@
-import {useState} from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import {FaCheck} from 'react-icons/fa';
+import { FaCheck } from "react-icons/fa";
+import AddToCartToggle from "./AddToCartToggle";
+import {Button} from "../styles/Button";
+import { NavLink } from "react-router-dom";
 
 const AddToCart = ({ product }) => {
   // eslint-disable-next-line
   const { id, colors, stock } = product;
-
   const [color, setColor] = useState(colors[0]);
+
+  const [amount, setAmount] = useState(1);
+
+  const setDecrement = () => {
+    amount > 1 ? setAmount(amount - 1) : setAmount(1);
+  };
+
+  const setIncrement = () => {
+    amount < stock ? setAmount(amount + 1) : setAmount(stock);
+  };
 
   return (
     <Wrapper>
@@ -19,23 +31,27 @@ const AddToCart = ({ product }) => {
                 key={index}
                 style={{ backgroundColor: curColor }}
                 className={color === curColor ? "btnStyle active" : "btnStyle"}
-                onClick={() => setColor(curColor)}>
+                onClick={() => setColor(curColor)}
+              >
                 {color === curColor ? <FaCheck className="checkStyle" /> : null}
               </button>
             );
           })}
         </p>
       </div>
+
+      <AddToCartToggle
+        amount={amount}
+        setIncrement={setIncrement}
+        setDecrement={setDecrement}
+      />
+
+      <NavLink to="/cart">
+        <Button className="btn">Add To Cart</Button>
+      </NavLink>
     </Wrapper>
   );
-
-  // return (
-  //   {colors.map((ele, id) => {
-  //     return ele;
-  //   })}
-  // )
 };
-
 
 const Wrapper = styled.section`
   .colors p {

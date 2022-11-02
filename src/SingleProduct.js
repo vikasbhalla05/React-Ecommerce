@@ -101,7 +101,7 @@ const SingleProduct = () => {
                 Id : <span>{id}</span>
               </p>
               <p>
-                Id : <span>{category}</span>
+              Category : <span>{category}</span>
               </p>
               <p>
                 Brand : <span>{company}</span>
