@@ -12,6 +12,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import Footer from "./components/Footer.jsx";
 import { AppProvider } from "./Contexts/productContext";
+import { FilterContextProvider } from "./Contexts/FilterContext.js";
 
 const App = () => {
   const theme = {
@@ -41,22 +42,24 @@ const App = () => {
 
   return (
     <AppProvider>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <BrowserRouter>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/products/:id" element={<SingleProduct />} />
-            <Route path="*" element={<ErrorPage />} />
-          </Routes>
-          <Footer />
-        </BrowserRouter>
-      </ThemeProvider>
+      <FilterContextProvider>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <BrowserRouter>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/products/:id" element={<SingleProduct />} />
+              <Route path="*" element={<ErrorPage />} />
+            </Routes>
+            <Footer />
+          </BrowserRouter>
+        </ThemeProvider>
+      </FilterContextProvider>
     </AppProvider>
   );
 };
