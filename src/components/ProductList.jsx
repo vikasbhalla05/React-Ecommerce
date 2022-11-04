@@ -8,7 +8,7 @@ const ProductList = () => {
   const {filteredProducts, gridView} = useFilterContext();
   console.log(gridView);
 
-  return gridView===false ? <ListView /> : <GridView products={filteredProducts}/>
+  return gridView===false ? <ListView products={filteredProducts}/> : <GridView products={filteredProducts}/>
 }
 
 export default ProductList
