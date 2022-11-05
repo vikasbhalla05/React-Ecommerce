@@ -18,8 +18,17 @@ const FilterReducer = (state, action) => {
         ...state,
         gridView: false
       };
+
+    case 'LOAD_SORT_PRODUCTS':
+      // let userSortValue = document.getElementById("sort");
+      // let sort_value = userSortValue.options[userSortValue.selectedIndex].value;
+      return {
+        ...state,
+        sorting_value : action.payload
+      }
+      
     default:
-      return state;
+      return {...state};
   }
 };
 
