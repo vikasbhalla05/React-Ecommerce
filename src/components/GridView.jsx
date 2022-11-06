@@ -5,14 +5,14 @@ import GridProduct from './GridProduct';
 
 const GridView = () => {
 
-  const { products} = useFilterContext();
+  const { filterProducts} = useFilterContext();
 
-  console.table(products);
+  // console.table(products);
   return (
     <Wrapper className='section'>
       <div className="container grid grid-three-column">
         {
-          products.map((elem, id) => {
+          filterProducts.map((elem, id) => {
             return <GridProduct key={elem.id} {...elem} />
           })
         }

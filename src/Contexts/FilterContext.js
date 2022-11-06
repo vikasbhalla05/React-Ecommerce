@@ -17,22 +17,27 @@ const FilterContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const setGridView = () => {
-        console.log("SET_GRID_VIEW");
+        // console.log("SET_GRID_VIEW");
         return dispatch({type: "SET_GRID_VIEW"})
     }
 
     const setListView = () => {
-        console.log("SET_LIST_VIEW");
+        // console.log("SET_LIST_VIEW");
         return dispatch({type: "SET_LIST_VIEW"})
     }
 
     const sorting =(e) => {
         let userValue = e.target.value;
-        return dispatch({type : "LOAD_SORT_PRODUCTS", payload : userValue});
+        return dispatch({type : "LOAD_SORT_VALUE", payload : userValue});
     }
+
+    useEffect(() => {
+        dispatch({ type: "SORTING_PRODUCTS", payload: products });
+    }, [state.sorting_value, products])
+    
     useEffect(() => {
         dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products });
-      }, [products, state.sorting_value]);
+      }, [products]);
     
 
     return (

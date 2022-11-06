@@ -10,25 +10,56 @@ const FilterReducer = (state, action) => {
     case "SET_GRID_VIEW":
       return {
         ...state,
-        gridView: true
+        gridView: true,
       };
 
     case "SET_LIST_VIEW":
       return {
         ...state,
-        gridView: false
+        gridView: false,
       };
 
-    case 'LOAD_SORT_PRODUCTS':
+    case "LOAD_SORT_VALUE":
       // let userSortValue = document.getElementById("sort");
       // let sort_value = userSortValue.options[userSortValue.selectedIndex].value;
+
+      // console.log(action.payload);
       return {
         ...state,
-        sorting_value : action.payload
-      }
-      
+        sorting_value: action.payload,
+      };
+
+    case "SORTING_PRODUCTS":
+      let FilterProducts;
+      let {filterProducts, sorting_value} = state;
+      let tempFilterProducts = [...filterProducts];
+
+      const sortingProducts = (a, b) => {
+        if (sorting_value === "lowest") {
+          return a.price - b.price;
+        }
+
+        if (sorting_value === "highest") {
+          return b.price - a.price;
+        }
+
+        if (sorting_value === "a-z") {
+          return a.name.localeCompare(b.name);
+        }
+
+        if (sorting_value === "z-a") {
+          return b.name.localeCompare(a.name);
+        }
+      };
+      FilterProducts = tempFilterProducts.sort(sortingProducts);
+      console.log(sorting_value);
+      return {
+        ...state,
+        filterProducts: FilterProducts,
+      };
+
     default:
-      return {...state};
+      return { ...state };
   }
 };
 

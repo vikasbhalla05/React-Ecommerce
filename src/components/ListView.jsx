@@ -7,12 +7,12 @@ import {Button} from '../styles/Button'
 
 const ListView = () => {
 
-  const {products} = useFilterContext();
+  const {filterProducts} = useFilterContext();
   return (
     <Wrapper className="section">
       <div className="grid container">
         {
-          products.map((curr, idx) => {
+          filterProducts.map((curr, idx) => {
             const { id, name, image, price, description } = curr;
 
             return (
