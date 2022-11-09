@@ -5,9 +5,9 @@ import GridView from './GridView';
 
 const ProductList = () => {
 
-  const {filteredProducts, gridView} = useFilterContext();
+  const {filterProducts, gridView} = useFilterContext();
 
-  return gridView===false ? <ListView products={filteredProducts}/> : <GridView products={filteredProducts}/>
+  return gridView===false ? <ListView products={filterProducts}/> : <GridView products={filterProducts}/>
 }
 
 export default ProductList

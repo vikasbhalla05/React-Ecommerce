@@ -3,8 +3,8 @@ const FilterReducer = (state, action) => {
     case "LOAD_FILTER_PRODUCTS":
       return {
         ...state,
-        filterProducts: action.payload,
-        products: action.payload,
+        filterProducts: [...action.payload],
+        products: [...action.payload],
       };
 
     case "SET_GRID_VIEW":
@@ -31,8 +31,8 @@ const FilterReducer = (state, action) => {
 
     case "SORTING_PRODUCTS":
       let FilterProducts;
-      let {filterProducts, sorting_value} = state;
-      let tempFilterProducts = [...filterProducts];
+      let {sorting_value} = state;
+      let tempFilterProducts = [...action.payload];
 
       const sortingProducts = (a, b) => {
         if (sorting_value === "lowest") {
@@ -52,11 +52,44 @@ const FilterReducer = (state, action) => {
         }
       };
       FilterProducts = tempFilterProducts.sort(sortingProducts);
-      console.log(sorting_value);
+      // console.log(sorting_value);
+      // console.table(FilterProducts);
       return {
         ...state,
-        filterProducts: FilterProducts,
+        filterProducts: FilterProducts
       };
+
+    case "CHANGE_SEARCH_BOX_VALUE":
+      const { name, value } = action.payload;
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [name]: value,
+        },
+      };
+
+      case "FILTER_PRODUCTS":
+        // let allProducts = products;
+        let {products} = state;
+        let tempFilteredProducts = [...products];
+
+        const {text} = state.filters;
+
+        if(text) {
+          tempFilteredProducts = tempFilteredProducts.filter((currEle) => 
+            currEle.name.toLowerCase().includes(text)
+          );
+        }
+
+        console.table(tempFilteredProducts)
+
+        return {
+          ...state,
+          filterProducts: [...tempFilteredProducts]
+        };
+
+
 
     default:
       return { ...state };
