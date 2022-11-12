@@ -3,8 +3,11 @@ import styled from "styled-components";
 import { useFilterContext } from "../Contexts/FilterContext";
 
 const FilterSection = () => {
-
-  const {products, filters : {text, category}, updateFiltersValue} = useFilterContext();
+  const {
+    products,
+    filters: { text, category, company },
+    updateFiltersValue,
+  } = useFilterContext();
 
   const getUniqueValues = (data, property) => {
     let filterData = data.map((currEle) => {
@@ -15,26 +18,66 @@ const FilterSection = () => {
     console.log(newVal);
 
     return Array.from(newVal);
-  }
+  };
   const categoryOnlyFilter = getUniqueValues(products, "category");
+  const companyOnlyFilter = getUniqueValues(products, "company");
 
   return (
     <Wrapper>
       <div className="filter-search">
         <form action="#" onSubmit={(e) => e.preventDefault()}>
-          <input type="text" name="text" value={text} placeholder="Search" onChange={updateFiltersValue}/>
+          <input
+            type="text"
+            name="text"
+            value={text}
+            placeholder="Search"
+            onChange={updateFiltersValue}
+          />
         </form>
       </div>
 
       <div className="filter-category">
-      <h3>Category</h3>
+        <h3>Category</h3>
         <div>
-          {
-            categoryOnlyFilter.map((curEl, idx) => {
-              return <button key={idx} type="button" name="category" value={curEl} onClick={updateFiltersValue}>{curEl}</button>
-            })
-          }
+          {categoryOnlyFilter.map((curEl, idx) => {
+            return (
+              <button
+                key={idx}
+                type="button"
+                name="category"
+                value={curEl}
+                onClick={updateFiltersValue}
+              >
+                {curEl}
+              </button>
+            );
+          })}
         </div>
+      </div>
+
+      <div className="filter-company">
+        <h3>Company</h3>
+
+        <form action="#">
+          <select
+            name="company"
+            id="company"
+            className="filter-company--select"
+            onClick={updateFiltersValue}
+          >
+            {companyOnlyFilter.map((curEl, idx) => {
+              return (
+                <option
+                  value={curEl}
+                  key={idx}
+                  name="company"
+                >
+                  {curEl}
+                </option>
+              );
+            })}
+          </select>
+        </form>
       </div>
     </Wrapper>
   );

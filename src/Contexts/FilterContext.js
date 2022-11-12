@@ -10,7 +10,8 @@ const initialState = {
     sorting_value : "highest",
     filters : {
         text : "",
-        category : "All"
+        category : "All",
+        company: "All"
     }
 }
 

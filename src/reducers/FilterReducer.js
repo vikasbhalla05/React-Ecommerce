@@ -74,7 +74,7 @@ const FilterReducer = (state, action) => {
         let {products} = state;
         let tempFilteredProducts = [...products];
 
-        const {text, category} = state.filters;
+        const {text, category, company} = state.filters;
 
         if(text) {
           tempFilteredProducts = tempFilteredProducts.filter((currEle) => 
@@ -84,12 +84,21 @@ const FilterReducer = (state, action) => {
 
         if(category) {
           tempFilteredProducts = tempFilteredProducts.filter((currEle) => {
-            if(currEle.category==="All") 
+            if(category==="All") 
               return currEle;
             
             return currEle.category.toLowerCase()===category;
           }
           );
+        }
+
+        if(company) {
+          tempFilteredProducts = tempFilteredProducts.filter((currEle) => {
+            if(company==="All") 
+              return currEle;
+            
+            return currEle.company.toLowerCase() ===company.toLowerCase();
+          })
         }
 
         console.table(tempFilteredProducts)
