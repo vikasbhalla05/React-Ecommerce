@@ -4,7 +4,7 @@ import { useFilterContext } from "../Contexts/FilterContext";
 
 const FilterSection = () => {
 
-  const {products, filters : {text}, updateFiltersValue} = useFilterContext();
+  const {products, filters : {text, category}, updateFiltersValue} = useFilterContext();
 
   const getUniqueValues = (data, property) => {
     let filterData = data.map((currEle) => {
@@ -14,7 +14,7 @@ const FilterSection = () => {
     let newVal = ["All", ...new Set(filterData)];
     console.log(newVal);
 
-    return newVal;
+    return Array.from(newVal);
   }
   const categoryOnlyFilter = getUniqueValues(products, "category");
 
@@ -27,9 +27,14 @@ const FilterSection = () => {
       </div>
 
       <div className="filter-category">
-        {
-
-        }
+      <h3>Category</h3>
+        <div>
+          {
+            categoryOnlyFilter.map((curEl, idx) => {
+              return <button key={idx} type="button" name="category" value={curEl} onClick={updateFiltersValue}>{curEl}</button>
+            })
+          }
+        </div>
       </div>
     </Wrapper>
   );

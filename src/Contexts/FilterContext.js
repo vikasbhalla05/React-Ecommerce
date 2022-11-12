@@ -9,7 +9,8 @@ const initialState = {
     gridView: true,
     sorting_value : "highest",
     filters : {
-        text : ""
+        text : "",
+        category : "All"
     }
 }
 
