@@ -17,10 +17,24 @@ const FilterSection = () => {
     let newVal = ["All", ...new Set(filterData)];
     console.log(newVal);
 
+    // colors extra code
+    if(property === "colors"){
+
+      // old method but good
+      let totalColors = ["All", ...new Set([].concat(...filterData))];
+      console.log(totalColors);
+      return totalColors;
+
+      // new Method
+      // return newVal.flat();
+    }
+
     return Array.from(newVal);
   };
+
   const categoryOnlyFilter = getUniqueValues(products, "category");
   const companyOnlyFilter = getUniqueValues(products, "company");
+  const colorOnlyFilter = getUniqueValues(products, "colors");
 
   return (
     <Wrapper>
@@ -78,6 +92,10 @@ const FilterSection = () => {
             })}
           </select>
         </form>
+      </div>
+
+      <div className="filter-color-style">
+        {}
       </div>
     </Wrapper>
   );
