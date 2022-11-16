@@ -16,7 +16,7 @@ const FilterSection = () => {
     });
 
     let newVal = ["All", ...new Set(filterData)];
-    console.log(newVal);
+    // console.log(newVal);
 
     // colors extra code
     if (property === "colors") {
@@ -95,7 +95,7 @@ const FilterSection = () => {
         <div className="filter-color-style">
           {colorOnlyFilter.map((curColor, index) => {
 
-            return curColor != "All" ? (
+            return curColor !== "All" ? (
               <button
                 key={index}
                 style={{ backgroundColor: curColor }}
