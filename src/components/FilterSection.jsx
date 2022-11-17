@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { useFilterContext } from "../Contexts/FilterContext";
 import { FaCheck } from "react-icons/fa";
+import IndianPrice from "../Helpers/IndianPrice";
 
 const FilterSection = () => {
   const {
     products,
-    filters: { text, category, company, color },
+    filters: { text, category, company, color, price, maxPrice, minPrice },
     updateFiltersValue,
   } = useFilterContext();
 
@@ -94,7 +95,6 @@ const FilterSection = () => {
         <h3>Colors</h3>
         <div className="filter-color-style">
           {colorOnlyFilter.map((curColor, index) => {
-
             return curColor !== "All" ? (
               <button
                 key={index}
@@ -120,6 +120,21 @@ const FilterSection = () => {
             );
           })}
         </div>
+      </div>
+
+      <div className="filter_price">
+        <h3>Price</h3>
+        <p>
+          <IndianPrice price={price} />
+        </p>
+        <input
+          type="range"
+          name="price"
+          min={minPrice}
+          max={maxPrice}
+          value={price}
+          onChange={updateFiltersValue}
+        ></input>
       </div>
     </Wrapper>
   );
