@@ -82,6 +82,20 @@ const FilterReducer = (state, action) => {
         },
       };
 
+      case "CLEAR_FILTERS":
+        return {
+          ...state,
+          filters : {
+            text : "",
+            category : "All",
+            company: "All",
+            color: "All",
+            price: 0,
+            maxPrice: 0,
+            minPrice: 0
+          }
+      }
+
       case "FILTER_PRODUCTS":
         // let allProducts = products;
         let {products} = state;
