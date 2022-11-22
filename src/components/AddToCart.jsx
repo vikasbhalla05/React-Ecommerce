@@ -2,12 +2,15 @@ import { useState } from "react";
 import styled from "styled-components";
 import { FaCheck } from "react-icons/fa";
 import AddToCartToggle from "./AddToCartToggle";
-import {Button} from "../styles/Button";
-import { NavLink } from "react-router-dom";
+import { Button } from "../styles/Button";
+import { NavLink, Link } from "react-router-dom";
+import { useCartContext } from "../Contexts/CartContext";
 
 const AddToCart = ({ product }) => {
   // eslint-disable-next-line
   const { id, colors, stock } = product;
+  const {addToCart} = useCartContext();
+
   const [color, setColor] = useState(colors[0]);
 
   const [amount, setAmount] = useState(1);
@@ -46,7 +49,7 @@ const AddToCart = ({ product }) => {
         setDecrement={setDecrement}
       />
 
-      <NavLink to="/cart">
+      <NavLink to="/cart" onClick={() => addToCart(id, color, amount, product)}>
         <Button className="btn">Add To Cart</Button>
       </NavLink>
     </Wrapper>
